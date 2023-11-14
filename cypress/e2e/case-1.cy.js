@@ -1,6 +1,7 @@
 describe("Case-1", () => {
   let userData;
   let mainData;
+  let skipAddingCookies = true;
 
   beforeEach(() => {
     cy.fixture("userData.json").then((data) => {
@@ -10,6 +11,10 @@ describe("Case-1", () => {
     cy.fixture("mainData.json").then((data) => {
       mainData = data;
     });
+
+    if (!skipAddingCookies) {
+      cy.setCookies();
+    }
   });
 
   it("Register User", () => {
@@ -78,6 +83,17 @@ describe("Case-1", () => {
     cy.get('[data-qa="continue-button"]')
       .should("have.text", "Continue")
       .click();
+
+    cy.saveCookies();
+
+    skipAddingCookies = false;
+  });
+
+  it("Delete user account", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.url().should("eq", mainData.baseURI + "/");
+
     cy.get(".nav.navbar-nav > li > a")
       .contains(` Logged in as ${userData.username}`)
       .should("be.visible");
