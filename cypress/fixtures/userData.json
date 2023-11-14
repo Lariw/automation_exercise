@@ -1,0 +1,16 @@
+{
+    "username": "jack-233",
+    "email": "jack-233@gmail.com",
+    "gender": "male",
+    "passwd": "jack233123",
+    "birthDate": "17.5.1982",
+    "firstName": "Jack",
+    "lastName": "Borew",
+    "company": "Siewosa",
+    "address": "144 N Market St Wooster, OH 44691-4810",
+    "country": "United States",
+    "state": "Ohio",
+    "city": "Wooster",
+    "zipcode":"44691",
+    "mobileNumber":"2832323842"
+}
