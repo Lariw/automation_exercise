@@ -103,8 +103,28 @@ describe("Case-1", () => {
       .contains(` Logged in as ${userData.username}`)
       .should("be.visible");
 
-    skipAddingCookies = false;
     cy.saveCookies();
+  });
+
+  it("Login User with incorrect email and password", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
+
+    cy.url().should("eq", mainData.baseURI + "/login");
+
+    cy.get(".login-form > h2").should("have.text", "Login to your account");
+    cy.get('[data-qa="login-email"]').type("abc" + userData.email);
+    cy.get('[data-qa="login-password"]').type("abc" + userData.passwd);
+    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+
+    cy.get("form > p")
+      .contains("Your email or password is incorrect!")
+      .should("be.visible");
+
+    cy.url().should("eq", mainData.baseURI + "/login");
+
+    skipAddingCookies = false;
   });
 
   it("Delete user account", () => {
