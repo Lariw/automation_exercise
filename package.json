@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "cypress": "^13.5.1"
+  },
+  "name": "automation_exercise",
+  "description": "Automation Exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "cypress",
+    "qa",
+    "qa-automation",
+    "test-case"
+  ],
+  "author": "Lariw",
+  "license": "ISC"
+}
