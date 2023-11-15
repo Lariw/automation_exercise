@@ -172,4 +172,22 @@ describe("Case-1", () => {
       .should("have.text", "Continue")
       .click();
   });
+
+  it("Register User with existing email", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+    cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
+    cy.get(".signup-form > h2").should("have.text", "New User Signup!");
+
+    cy.get('[data-qa="signup-name"]').type(userData.username);
+    cy.get('[data-qa="signup-email"]').type(userData.email);
+    cy.get('[data-qa="signup-button"]').click();
+
+    cy.get("form > p")
+      .eq(0)
+      .should("have.text", "Email Address already exist!");
+  });
 });
