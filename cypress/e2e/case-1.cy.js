@@ -223,4 +223,39 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/");
   });
+
+  it("Verify Products and product detail page", () => {
+    cy.visit(mainData.baseURI + "/");
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Products").click();
+
+    cy.url().should("eq", mainData.baseURI + "/products");
+
+    cy.get(".features_items").should("be.visible");
+
+    cy.get(".choose").eq(0).click();
+
+    cy.url().should("eq", mainData.baseURI + "/product_details/1");
+
+    cy.get(".product-information > h2").should("be.visible");
+    cy.get(".product-information > p")
+      .contains("Category")
+      .should("be.visible");
+    cy.get(".product-information > p")
+      .contains("Availability:")
+      .should("be.visible");
+    cy.get(".product-information > p")
+      .contains("Condition:")
+      .should("be.visible");
+    cy.get(".product-information > p").contains("Brand:").should("be.visible");
+
+    cy.get(".product-information > span > span")
+      .contains("Rs.")
+      .should("be.visible");
+  });
 });
