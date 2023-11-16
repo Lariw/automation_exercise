@@ -384,4 +384,24 @@ describe("Case-1", () => {
       cy.get(".cart_price > p").eq(1).should("have.text", prices[1]);
     });
   });
+
+  it("Verify Product quantity in Cart", () => {
+    cy.visit(mainData.baseURI + "/");
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get('.productinfo.text-center >[data-product-id="7"]').scrollIntoView();
+    cy.get('li > [href="/product_details/7"]').click();
+    cy.get("#quantity").clear().type("4");
+    cy.get("button").contains("Add to cart").click();
+
+    cy.get("p > a > u").click();
+
+    cy.url().should("eq", mainData.baseURI + "/view_cart");
+
+    cy.get(".cart_quantity > button").should("have.text", "4");
+  });
 });
