@@ -286,4 +286,24 @@ describe("Case-1", () => {
       expect(elementDesc).to.include("Top");
     });
   });
+
+  it("Verify Subscription in home page.", () => {
+    cy.visit(mainData.baseURI + "/");
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get("#susbscribe_email").scrollIntoView();
+
+    cy.get("#susbscribe_email").type(userData.email);
+    cy.get("#subscribe").click();
+
+    cy.get(".alert-success.alert").should("be.visible");
+    cy.get(".alert-success.alert").should(
+      "have.text",
+      "You have been successfully subscribed!"
+    );
+  });
 });
