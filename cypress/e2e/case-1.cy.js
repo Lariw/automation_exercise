@@ -258,4 +258,32 @@ describe("Case-1", () => {
       .contains("Rs.")
       .should("be.visible");
   });
+
+  it("Search Product.", () => {
+    cy.visit(mainData.baseURI + "/");
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Products").click();
+    cy.url().should("eq", mainData.baseURI + "/products");
+
+    cy.get("#search_product").type("Top");
+    cy.get("#submit_search").click();
+
+    cy.url().should("eq", mainData.baseURI + "/products?search=Top");
+
+    cy.get(".features_items > .title.text-center").should("be.visible");
+    cy.get(".features_items > .title.text-center").should(
+      "have.text",
+      "Searched Products"
+    );
+
+    cy.get(".productinfo.text-center > p").each((element) => {
+      const elementDesc = element.text();
+      expect(elementDesc).to.include("Top");
+    });
+  });
 });
