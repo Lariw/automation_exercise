@@ -1004,4 +1004,29 @@ describe("Case-1", () => {
       .contains("Men - Tshirts Products")
       .should("exist");
   });
+
+  it("View & Cart Brand Products", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Products").click();
+
+    cy.get(".left-sidebar > .brands_products > h2")
+      .contains("Brands")
+      .should("be.visible");
+
+    cy.get(".brands-name > ul > li > a").contains("Polo").click();
+
+    cy.get(".title.text-center").should("have.text", "Brand - Polo Products");
+
+    cy.get(".brands-name > ul > li > a").contains("Allen Solly Junior").click();
+
+    cy.get(".title.text-center").should(
+      "have.text",
+      "Brand - Allen Solly Junior Products"
+    );
+  });
 });
