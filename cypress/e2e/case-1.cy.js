@@ -976,4 +976,32 @@ describe("Case-1", () => {
     cy.wait(1000);
     cy.get(".cart_quantity_delete").eq(0).click();
   });
+
+  it("View Category Products", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.get("section").should("be.visible");
+    cy.get("header").should("be.visible");
+    cy.get("footer").should("be.visible");
+
+    cy.get(".left-sidebar > h2").contains("Category").should("be.visible");
+
+    cy.get(".panel-title > a").contains("Women").click();
+
+    cy.get(".panel-body > ul > li ").contains("Dress").click();
+
+    cy.get(".title.text-center")
+      .contains("Women - Dress Products")
+      .should("exist");
+
+    cy.get(".left-sidebar > h2").contains("Category").should("be.visible");
+
+    cy.get(".panel-title > a").contains("Men").click();
+
+    cy.get(".panel-body > ul > li ").contains("Tshirts").click();
+
+    cy.get(".title.text-center")
+      .contains("Men - Tshirts Products")
+      .should("exist");
+  });
 });
