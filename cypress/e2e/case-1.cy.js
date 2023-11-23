@@ -565,18 +565,6 @@ describe("Case-1", () => {
     cy.get(".form-control").type("Lorem ipsum dolor sodoles.");
 
     cy.userPayments(userData, mainData);
-
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
-
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
   });
 
   it("Remove Products From Cart", () => {
@@ -664,6 +652,8 @@ describe("Case-1", () => {
 
     cy.get(".nav.navbar-nav > li > a").contains(" Products").click();
 
+    cy.url().should("eq", mainData.baseURI + "/products");
+
     cy.get(".left-sidebar > .brands_products > h2")
       .contains("Brands")
       .should("be.visible");
@@ -678,5 +668,76 @@ describe("Case-1", () => {
       "have.text",
       "Brand - Allen Solly Junior Products"
     );
+  });
+
+  it("Search Products and Verify Cart After Login", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.pageLoadVerification();
+    cy.get(".nav.navbar-nav > li > a").contains(" Products").click();
+    cy.url().should("eq", mainData.baseURI + "/products");
+    cy.get(".title.text-center").should("have.text", "All Products");
+
+    cy.get("#search_product").type("Sleeveless Dress");
+    cy.get("#submit_search").click();
+
+    cy.url().should(
+      "eq",
+      mainData.baseURI + "/products?search=Sleeveless%20Dress"
+    );
+
+    cy.get(".features_items").should("be.visible");
+
+    cy.get(
+      ".features_items > .col-sm-4 > .product-image-wrapper > .single-products > .productinfo.text-center > p"
+    ).should("have.text", "Sleeveless Dress");
+
+    cy.get(".btn.btn-default.add-to-cart").eq(0).click({ force: true });
+
+    cy.get("a > u").contains("View Cart").click();
+
+    cy.url().should("eq", mainData.baseURI + "/view_cart");
+
+    cy.get(".cart_description > h4 > a").should(
+      "have.text",
+      "Sleeveless Dress"
+    );
+
+    cy.get(".btn.btn-default.check_out").click();
+
+    cy.get("a > u").contains("Register / Login").click();
+
+    cy.url().should("eq", mainData.baseURI + "/login");
+
+    cy.get(".login-form > h2").should("have.text", "Login to your account");
+    cy.get('[data-qa="login-email"]').type(userData.email);
+    cy.get('[data-qa="login-password"]').type(userData.passwd);
+    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get(".nav.navbar-nav > li > a")
+      .contains(` Logged in as ${userData.username}`)
+      .should("be.visible");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Cart").click();
+
+    cy.url().should("eq", mainData.baseURI + "/view_cart");
+
+    cy.get(".cart_description > h4 > a").should(
+      "have.text",
+      "Sleeveless Dress"
+    );
+
+    cy.get(".nav.navbar-nav > li > a")
+      .contains(" Delete Account")
+      .should("be.visible")
+      .click();
+
+    cy.url().should("eq", mainData.baseURI + "/delete_account");
+    cy.get(".title.text-center > b").should("be.visible");
+    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
+    cy.get('[data-qa="continue-button"]')
+      .should("have.text", "Continue")
+      .click();
   });
 });
