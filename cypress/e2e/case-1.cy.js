@@ -932,4 +932,21 @@ describe("Case-1", () => {
       .contains("Full-Fledged practice website for Automation Engineers")
       .should("be.visible");
   });
+
+
+  it('Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.pageLoadVerification();
+
+    cy.get(".footer-bottom").scrollIntoView({ duration: 1000 });
+
+    cy.get('.single-widget > h2').contains('Subscription').should('be.visible')
+
+    cy.get("#header").scrollIntoView({ duration: 1000 });
+
+    cy.get("h2")
+      .contains("Full-Fledged practice website for Automation Engineers")
+      .should("be.visible");
+  });
 });
