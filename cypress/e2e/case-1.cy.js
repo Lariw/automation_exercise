@@ -802,4 +802,54 @@ describe("Case-1", () => {
       cy.get(".cart_price > p").eq(0).should("have.text", prices[0]);
     });
   });
+
+  it("Verify address details in checkout page", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.pageLoadVerification();
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
+
+    cy.url().should("eq", mainData.baseURI + "/login");
+
+    cy.userRegistration(userData, mainData);
+
+    let prices = [];
+    let names = [];
+
+    cy.get(".productinfo.text-center")
+      .eq(0)
+      .then((element) => {
+        const price = Cypress.$(element).find("h2").text();
+        const name = Cypress.$(element).find("p").text();
+
+        prices.push(price);
+        names.push(name);
+      });
+
+    cy.get(".productinfo.text-center > a").contains("Add to cart").click();
+
+    cy.get("a > u").contains("View Cart").click();
+
+    cy.url().should("eq", mainData.baseURI + "/view_cart");
+
+    cy.then(() => {
+      cy.get(".cart_description > h4 > a").eq(0).should("have.text", names[0]);
+      cy.get(".cart_price > p").eq(0).should("have.text", prices[0]);
+    });
+
+    cy.checkoutVerification(userData, mainData);
+
+    cy.get(".nav.navbar-nav > li > a")
+      .contains(" Delete Account")
+      .should("be.visible")
+      .click();
+
+    cy.url().should("eq", mainData.baseURI + "/delete_account");
+    cy.get(".title.text-center > b").should("be.visible");
+    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
+    cy.get('[data-qa="continue-button"]')
+      .should("have.text", "Continue")
+      .click();
+  });
 });
