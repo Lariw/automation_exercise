@@ -918,4 +918,18 @@ describe("Case-1", () => {
       .should("have.text", "Continue")
       .click();
   });
+
+  it('Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.pageLoadVerification();
+
+    cy.get(".footer-bottom").scrollIntoView({ duration: 5000 });
+
+    cy.get("#scrollUp").click();
+
+    cy.get("h2")
+      .contains("Full-Fledged practice website for Automation Engineers")
+      .should("be.visible");
+  });
 });
