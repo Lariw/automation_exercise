@@ -1,5 +1,4 @@
 describe("Case-1", () => {
-
   let userData = null;
   let mainData = null;
   let skipAddingCookies = true;
@@ -21,7 +20,7 @@ describe("Case-1", () => {
     }
   });
 
-  it("Register User", () => {
+  it("[TC-01] - Register User", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -33,7 +32,7 @@ describe("Case-1", () => {
     cy.userRegistration(userData, mainData);
   });
 
-  it("Register User with existing email", () => {
+  it("[TC-02] - Register User with existing email", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -49,7 +48,7 @@ describe("Case-1", () => {
       .should("have.text", "Email Address already exist!");
   });
 
-  it("Login User with correct email and password", () => {
+  it("[TC-03] - Login User with correct email and password", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
@@ -68,7 +67,7 @@ describe("Case-1", () => {
     skipAddingCookies = false;
   });
 
-  it("Logout User", () => {
+  it("[TC-04] - Logout User", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
     cy.get(".nav.navbar-nav > li > a ").contains(" Logout").click();
@@ -77,7 +76,7 @@ describe("Case-1", () => {
     skipAddingCookies = true;
   });
 
-  it("Login User with incorrect email and password", () => {
+  it("[TC-05] - Login User with incorrect email and password", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
@@ -93,7 +92,7 @@ describe("Case-1", () => {
     cy.url().should("eq", mainData.baseURI + "/login");
   });
 
-  it("Delete user account", () => {
+  it("[TC-06] - Delete user account", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
@@ -119,7 +118,7 @@ describe("Case-1", () => {
     cy.deleteAccount(mainData);
   });
 
-  it("Contact Us Form", () => {
+  it("[TC-07] - Contact Us Form", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -149,7 +148,7 @@ describe("Case-1", () => {
     cy.url().should("eq", mainData.baseURI + "/");
   });
 
-  it("Verify Products and product detail page", () => {
+  it("[TC-08] - Verify Products and product detail page", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -182,7 +181,7 @@ describe("Case-1", () => {
       .should("be.visible");
   });
 
-  it("Search Product.", () => {
+  it("[TC-09] - Search Product", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -208,7 +207,7 @@ describe("Case-1", () => {
     });
   });
 
-  it("Verify Subscription in home page.", () => {
+  it("[TC-10] - Verify Subscription in home page", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -226,7 +225,7 @@ describe("Case-1", () => {
     );
   });
 
-  it("Verify Subscription in Cart page", () => {
+  it("[TC-11] - Verify Subscription in Cart page", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -247,7 +246,7 @@ describe("Case-1", () => {
     );
   });
 
-  it("Add Products in Cart", () => {
+  it("[TC-12] - Add Products in Cart", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -300,7 +299,7 @@ describe("Case-1", () => {
     });
   });
 
-  it("Verify Product quantity in Cart", () => {
+  it("[TC-13] - Verify Product quantity in Cart", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -318,7 +317,7 @@ describe("Case-1", () => {
     cy.get(".cart_quantity > button").should("have.text", "4");
   });
 
-  it("Place Order: Register while Checkout", () => {
+  it("[TC-14] - Place Order: Register while Checkout", () => {
     cy.visit(mainData.baseURI + "/");
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -393,7 +392,7 @@ describe("Case-1", () => {
     cy.deleteAccount(mainData);
   });
 
-  it("Place Order: Register before Checkout", () => {
+  it("[TC-15] - Place Order: Register before Checkout", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -463,7 +462,7 @@ describe("Case-1", () => {
     cy.userPayments(userData, mainData);
   });
 
-  it("Place Order: Login before Checkout", () => {
+  it("[TC-16] - Place Order: Login before Checkout", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
@@ -537,7 +536,7 @@ describe("Case-1", () => {
     cy.userPayments(userData, mainData);
   });
 
-  it("Remove Products From Cart", () => {
+  it("[TC-17] - Remove Products From Cart", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -589,7 +588,7 @@ describe("Case-1", () => {
     cy.get(".cart_quantity_delete").eq(0).click();
   });
 
-  it("View Category Products", () => {
+  it("[TC-18] - View Category Products", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -615,7 +614,7 @@ describe("Case-1", () => {
       .should("exist");
   });
 
-  it("View & Cart Brand Products", () => {
+  it("[TC-19] - View & Cart Brand Products", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -640,7 +639,7 @@ describe("Case-1", () => {
     );
   });
 
-  it("Search Products and Verify Cart After Login", () => {
+  it("[TC-20] - Search Products and Verify Cart After Login", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -699,7 +698,7 @@ describe("Case-1", () => {
     cy.deleteAccount(mainData);
   });
 
-  it("Add review on product", () => {
+  it("[TC-21] - Add review on product", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -725,7 +724,7 @@ describe("Case-1", () => {
     );
   });
 
-  it("Add to cart from Recommended items", () => {
+  it("[TC-22] - Add to cart from Recommended items", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -761,7 +760,7 @@ describe("Case-1", () => {
     });
   });
 
-  it("Verify address details in checkout page", () => {
+  it("[TC-23] - Verify address details in checkout page", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -801,7 +800,7 @@ describe("Case-1", () => {
     cy.deleteAccount(mainData);
   });
 
-  it("Download Invoice after purchase order", () => {
+  it("[TC-24] - Download Invoice after purchase order", () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -855,7 +854,7 @@ describe("Case-1", () => {
     cy.deleteAccount(mainData);
   });
 
-  it('Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
+  it('[TC-25] - Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
@@ -869,7 +868,7 @@ describe("Case-1", () => {
       .should("be.visible");
   });
 
-  it('Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
+  it('[TC-26] - Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
     cy.visit(mainData.baseURI + "/");
 
     cy.pageLoadVerification();
