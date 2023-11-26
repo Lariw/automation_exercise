@@ -766,4 +766,40 @@ describe("Case-1", () => {
       "Thank you for your review."
     );
   });
+
+  it("Add to cart from Recommended items", () => {
+    cy.visit(mainData.baseURI + "/");
+
+    cy.pageLoadVerification();
+
+    cy.get("#recommended-item-carousel").scrollIntoView();
+
+    let prices = [];
+    let names = [];
+
+    cy.get(
+      "#recommended-item-carousel >.carousel-inner > .item.active > div > div > div > div"
+    )
+      .eq(0)
+      .then((element) => {
+        const price = Cypress.$(element).find("h2").text();
+        const name = Cypress.$(element).find("p").text();
+
+        prices.push(price);
+        names.push(name);
+      });
+
+    cy.get(
+      "#recommended-item-carousel >.carousel-inner > .item.active > div > div > div > div > a"
+    )
+      .eq(0)
+      .click();
+
+    cy.get("a > u").contains("View Cart").click();
+
+    cy.then(() => {
+      cy.get(".cart_description > h4 > a").eq(0).should("have.text", names[0]);
+      cy.get(".cart_price > p").eq(0).should("have.text", prices[0]);
+    });
+  });
 });
