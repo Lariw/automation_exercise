@@ -104,6 +104,33 @@ Cypress.Commands.add("userPayments", (userData, mainData) => {
   cy.get('[data-qa="pay-button"]').contains("Pay and Confirm Order").click();
 });
 
+Cypress.Commands.add("deleteAccount", (mainData) => {
+  cy.get(".nav.navbar-nav > li > a")
+    .contains(" Delete Account")
+    .should("be.visible")
+    .click();
+
+  cy.url().should("eq", mainData.baseURI + "/delete_account");
+  cy.get(".title.text-center > b").should("be.visible");
+  cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
+  cy.get('[data-qa="continue-button"]').should("have.text", "Continue").click();
+});
+
+Cypress.Commands.add("login", (userData, failedLogin) => {
+  let email = userData.email;
+  let passwd = userData.passwd;
+  if (failedLogin) {
+    email += "abc";
+
+    passwd += "abc";
+  }
+
+  cy.get(".login-form > h2").should("have.text", "Login to your account");
+  cy.get('[data-qa="login-email"]').type(email);
+  cy.get('[data-qa="login-password"]').type(passwd);
+  cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+});
+
 Cypress.Commands.add("checkoutVerification", (userData, mainData) => {
   cy.get(".check_out").contains("Proceed To Checkout").click();
   cy.url().should("eq", mainData.baseURI + "/checkout");

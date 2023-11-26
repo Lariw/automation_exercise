@@ -57,10 +57,7 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/login");
 
-    cy.get(".login-form > h2").should("have.text", "Login to your account");
-    cy.get('[data-qa="login-email"]').type(userData.email);
-    cy.get('[data-qa="login-password"]').type(userData.passwd);
-    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    cy.login(userData);
 
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -88,10 +85,12 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/login");
 
-    cy.get(".login-form > h2").should("have.text", "Login to your account");
-    cy.get('[data-qa="login-email"]').type("abc" + userData.email);
-    cy.get('[data-qa="login-password"]').type("abc" + userData.passwd);
-    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    // cy.get(".login-form > h2").should("have.text", "Login to your account");
+    // cy.get('[data-qa="login-email"]').type("abc" + userData.email);
+    // cy.get('[data-qa="login-password"]').type("abc" + userData.passwd);
+    // cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+
+    cy.login(userData, "failedLogin");
 
     cy.get("form > p")
       .contains("Your email or password is incorrect!")
@@ -107,10 +106,7 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/login");
 
-    cy.get(".login-form > h2").should("have.text", "Login to your account");
-    cy.get('[data-qa="login-email"]').type(userData.email);
-    cy.get('[data-qa="login-password"]').type(userData.passwd);
-    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    cy.login(userData);
 
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -125,17 +121,8 @@ describe("Case-1", () => {
     cy.get(".nav.navbar-nav > li > a")
       .contains(` Logged in as ${userData.username}`)
       .should("be.visible");
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
 
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
+    cy.deleteAccount(mainData);
   });
 
   it("Contact Us Form", () => {
@@ -409,17 +396,7 @@ describe("Case-1", () => {
 
     cy.userPayments(userData, mainData);
 
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
-
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
+    cy.deleteAccount(mainData);
   });
 
   it("Place Order: Register before Checkout", () => {
@@ -499,10 +476,7 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/login");
 
-    cy.get(".login-form > h2").should("have.text", "Login to your account");
-    cy.get('[data-qa="login-email"]').type(userData.email);
-    cy.get('[data-qa="login-password"]').type(userData.passwd);
-    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    cy.login(userData);
 
     cy.url().should("eq", mainData.baseURI + "/");
 
@@ -711,10 +685,8 @@ describe("Case-1", () => {
 
     cy.url().should("eq", mainData.baseURI + "/login");
 
-    cy.get(".login-form > h2").should("have.text", "Login to your account");
-    cy.get('[data-qa="login-email"]').type(userData.email);
-    cy.get('[data-qa="login-password"]').type(userData.passwd);
-    cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
+    cy.login(userData);
+
     cy.url().should("eq", mainData.baseURI + "/");
 
     cy.get(".nav.navbar-nav > li > a")
@@ -730,17 +702,7 @@ describe("Case-1", () => {
       "Sleeveless Dress"
     );
 
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
-
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
+    cy.deleteAccount(mainData);
   });
 
   it("Add review on product", () => {
@@ -842,17 +804,7 @@ describe("Case-1", () => {
 
     cy.checkoutVerification(userData, mainData);
 
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
-
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
+    cy.deleteAccount(mainData);
   });
 
   it("Download Invoice after purchase order", () => {
@@ -906,17 +858,7 @@ describe("Case-1", () => {
 
     cy.get(".pull-right > a").contains("Continue").click();
 
-    cy.get(".nav.navbar-nav > li > a")
-      .contains(" Delete Account")
-      .should("be.visible")
-      .click();
-
-    cy.url().should("eq", mainData.baseURI + "/delete_account");
-    cy.get(".title.text-center > b").should("be.visible");
-    cy.get(".title.text-center > b").should("have.text", "Account Deleted!");
-    cy.get('[data-qa="continue-button"]')
-      .should("have.text", "Continue")
-      .click();
+    cy.deleteAccount(mainData);
   });
 
   it('Verify Scroll Up using "Arrow" button and Scroll Down functionality', () => {
@@ -933,7 +875,6 @@ describe("Case-1", () => {
       .should("be.visible");
   });
 
-
   it('Verify Scroll Up without "Arrow" button and Scroll Down functionality', () => {
     cy.visit(mainData.baseURI + "/");
 
@@ -941,7 +882,7 @@ describe("Case-1", () => {
 
     cy.get(".footer-bottom").scrollIntoView({ duration: 1000 });
 
-    cy.get('.single-widget > h2').contains('Subscription').should('be.visible')
+    cy.get(".single-widget > h2").contains("Subscription").should("be.visible");
 
     cy.get("#header").scrollIntoView({ duration: 1000 });
 
