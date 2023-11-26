@@ -1,5 +1,4 @@
 describe("Case-1", () => {
-  const path = require("path");
 
   let userData = null;
   let mainData = null;
@@ -84,11 +83,6 @@ describe("Case-1", () => {
     cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
 
     cy.url().should("eq", mainData.baseURI + "/login");
-
-    // cy.get(".login-form > h2").should("have.text", "Login to your account");
-    // cy.get('[data-qa="login-email"]').type("abc" + userData.email);
-    // cy.get('[data-qa="login-password"]').type("abc" + userData.passwd);
-    // cy.get('[data-qa="login-button"]').should("have.text", "Login").click();
 
     cy.login(userData, "failedLogin");
 
