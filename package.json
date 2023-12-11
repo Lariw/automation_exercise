@@ -1,7 +1,7 @@
 {
   "name": "automation_exercise",
   "description": "Automation Exercise",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "start": "npx cypress run"
