@@ -1,12 +1,14 @@
 {
   "devDependencies": {
-    "cypress": "^13.5.1"
+    "cypress": "^13.6.1"
   },
   "name": "automation_exercise",
   "description": "Automation Exercise",
   "version": "1.0.1",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    
+  },
   "keywords": [
     "cypress",
     "qa",
