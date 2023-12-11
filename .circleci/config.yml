@@ -5,8 +5,5 @@ workflows:
   build:
     jobs:
       - cypress/run:
-          cypress-command: npx cypress run --browser chrome
-          install-browsers: true
+          start-command: 'npm run start'
           store_artifacts: true
-          record: true
-          
