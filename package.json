@@ -1,7 +1,4 @@
 {
-  "devDependencies": {
-    "cypress": "^13.6.1"
-  },
   "name": "automation_exercise",
   "description": "Automation Exercise",
   "version": "1.0.1",
@@ -14,5 +11,8 @@
     "test-case"
   ],
   "author": "Lariw",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.6.1"
+  }
 }
