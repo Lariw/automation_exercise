@@ -1,7 +1,7 @@
 describe("[TC-04]", () => {
   let userData = null;
   let mainData = null;
-  let skipAddingCookies = true;
+  let skipAddingCookies = false;
   let fileInput = "cypress/fixtures/inputFile.txt";
 
   before(() => {

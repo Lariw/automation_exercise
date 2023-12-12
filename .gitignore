@@ -1,4 +1,5 @@
 node_modules
 cypress/fixtures/cookies.json
 cypress/downloads/*
-cypress/screenshots/*
+cypress/screenshots
+cypress/videos
