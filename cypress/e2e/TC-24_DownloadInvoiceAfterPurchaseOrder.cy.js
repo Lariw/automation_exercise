@@ -67,7 +67,7 @@ describe("[TC-24]", () => {
 
     cy.wait(2000);
 
-    cy.readFile("cypress\\Downloads\\invoice.txt");
+    cy.readFile("cypress/Downloads/invoice.txt");
 
     cy.get(".pull-right > a").contains("Continue").click();
 

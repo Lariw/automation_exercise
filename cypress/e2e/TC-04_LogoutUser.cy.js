@@ -1,7 +1,7 @@
 describe("[TC-04]", () => {
   let userData = null;
   let mainData = null;
-  let skipAddingCookies = false;
+  let skipAddingCookies = true;
   let fileInput = "cypress/fixtures/inputFile.txt";
 
   before(() => {
@@ -21,7 +21,21 @@ describe("[TC-04]", () => {
   });
 
   it("[TC-04] - Logout User", () => {
+
     cy.visit(mainData.baseURI + "/");
+
+    cy.get(".nav.navbar-nav > li > a").contains(" Signup / Login").click();
+
+    cy.url().should("eq", mainData.baseURI + "/login");
+
+    cy.login(userData);
+
+    cy.url().should("eq", mainData.baseURI + "/");
+
+    cy.get(".nav.navbar-nav > li > a")
+      .contains(` Logged in as ${userData.username}`)
+      .should("be.visible");
+
     cy.url().should("eq", mainData.baseURI + "/");
     cy.get(".nav.navbar-nav > li > a ").contains(" Logout").click();
 
