@@ -1,8 +1,24 @@
 # automation_exercise
 
-Automated tests for the website https://automationexercise.com/ written in Cypress.
+:red_circle: Automated tests for the website https://automationexercise.com/ written in Cypress.
 
-## Test Case
+## Setup Instructions :warning:
+
+First, to start
+
+```sh
+npm install
+```
+
+Next, to start testing:
+
+```sh
+npx cypress open
+```
+
+
+
+## Test Case :closed_book:
 
 
 | Case number | Case|
