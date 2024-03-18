@@ -3,8 +3,12 @@
 :red_circle: Automated tests for the website https://automationexercise.com/ written in Cypress.
 
 
+![image](https://github.com/Lariw/automation_exercise/assets/98982966/8c1249af-092d-4c42-a93b-dff51265c7c1)
 
 :arrow_right: :hammer:   [View more on Github Actions](https://github.com/Lariw/automation_exercise/actions)
+
+
+
 
 ----
 
